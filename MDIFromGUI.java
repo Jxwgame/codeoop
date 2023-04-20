@@ -31,7 +31,7 @@ public class MDIFromGUI extends JFrame{
     msi2 = new JMenuItem("Message");
     ms1.add(msi1);
     ms1.add(msi2);
-    //DesktopPane
+    //DesktopPane setTrue
     desktopPane = new JDesktopPane();
     frame1 = new JInternalFrame("Application01", true, true, true, true);
     frame2 = new JInternalFrame("Application02", true, true, true, true);
@@ -40,11 +40,11 @@ public class MDIFromGUI extends JFrame{
     frame1.getContentPane();
     frame1.pack();
     frame1.setVisible(true);
-    
+    //JInternalFrame2
     frame2.getContentPane();
     frame2.pack();
     frame2.setVisible(true);
-    
+    //JInternalJFrame3
     frame3.getContentPane();
     frame3.pack();
     frame3.setVisible(true);
@@ -66,5 +66,14 @@ public class MDIFromGUI extends JFrame{
     fr.setSize(300, 300);
     fr.setVisible(true);
     
+    
 }
+    public static void main(String[] args) {
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+} catch (Exception e) {
+    e.printStackTrace();
+}
+        SwingUtilities.invokeLater(() -> { MDIFromGUI frame = new MDIFromGUI(); });
+    }
 }
