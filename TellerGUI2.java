@@ -55,8 +55,8 @@ public class TellerGUI2 implements ActionListener{
             }
         else if(ae.getSource().equals(btn1)){
             int amount = Integer.parseInt(tf1.getText());
-            int total = (int)ac.getBalance() + amount;
-            tf.setText(total+"");
+            ac.deposit(amount);
+            tf.setText(ac.getBalance()+"");
         }
         else if(ae.getSource().equals(btn3)){
             System.exit(0);
