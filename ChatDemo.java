@@ -4,7 +4,7 @@ import java.awt.event.*;
 import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-public class ChatDemo implements ActionListener{
+public class ChatDemo implements ActionListener, WindowListener{
     private JFrame fr;
     private JTextArea area;
     private JTextField text;
@@ -29,8 +29,11 @@ public class ChatDemo implements ActionListener{
         fr.setResizable(false);
         bt1.addActionListener(this);
         bt2.addActionListener(this);
+        fr.addWindowListener(this);
     }
-
+    public static void main(String[] args) {
+        new ChatDemo();
+    }
     @Override
     public void actionPerformed(ActionEvent ae) {
         if(ae.getSource().equals(bt1)){
@@ -48,4 +51,37 @@ public class ChatDemo implements ActionListener{
             text.setText("");
         }
     }
+    public void windowClosing(WindowEvent ev){
+        try(FileWriter fw = new FileWriter("ChatDemo.dat"); ){
+            String str = area.getText();
+            fw.write(str);
+            System.out.println("Pass");
+}
+        catch (IOException ex) {
+            System.out.println(ex);}
+        
+    }
+    @Override
+    public void windowOpened(WindowEvent ev){
+        String str = "";
+        try(FileReader fr = new FileReader("ChatDemo.dat")){
+            int ch;
+            while ((ch=fr.read())!=-1){
+                str += (char)ch;
+            }
+            fr.close();
+        } catch(IOException ex){
+        }
+        area.setText(str);
+    }
+    @Override
+    public void windowClosed(WindowEvent ev) {}
+    @Override
+    public void windowIconified(WindowEvent ev) {}
+    @Override
+    public void windowDeiconified(WindowEvent ev) {}
+    @Override
+    public void windowActivated(WindowEvent ev) {}
+    @Override
+    public void windowDeactivated(WindowEvent ev) {}
 }
